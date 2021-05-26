@@ -13,7 +13,7 @@ Focus on [task 2.1](#Tasks) if you're applying for a front-end position. Focus o
 
 ## Constraints
 
->= 2 hours time 
+less or equal 2 hours working time 
 
 ## Prioritisation
 
