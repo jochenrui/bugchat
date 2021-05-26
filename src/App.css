@@ -1,8 +1,12 @@
 .App {
   text-align: center;
   height: 100vh;
-  background: rgb(34,193,195);
-  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,0.29315476190476186) 100%);
+  background: rgb(34, 193, 195);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 0.29315476190476186) 100%
+  );
 }
 
 .root {
@@ -41,8 +45,6 @@
   width: fit-content;
 }
 
-
-
 .mainContainer {
   max-width: 500px;
   margin-left: auto;
@@ -59,6 +61,8 @@
 
 .chatWrap {
   display: grid;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .App-header {
