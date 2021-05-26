@@ -13,7 +13,7 @@ export default function InputZone(props) {
         inputProps={{ "aria-label": "Enter..." }}
         value={props.value}
         onKeyPress={props.handleSubmit}
-        onChange={props.handleChange}
+        onChange={(e) => props.handleChange(e.target.value)}
       />
       <IconButton
         disabled={props.value.length === 0 ? true : false}
