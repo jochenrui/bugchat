@@ -9,7 +9,13 @@ The app is a chatbot which responds to your messages but lets just say that the 
 We **DO NOT** expect you to do all the tasks listed here. Just focus on the ones that support your application (as a frontend or backend developer).
 Focus on [task 2.1](#Tasks) if you're applying for a front-end position. Focus on [task 2.2](#Tasks) for backend positions.
 
-# Prioritisation
+# Task
+
+## Constraints
+
+>= 2 hours time 
+
+## Prioritisation
 
 - understand frontend, refactor code, add functionalities if missing
 - integrate StackExchange API
