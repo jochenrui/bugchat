@@ -37,11 +37,15 @@ Focus on [task 2.1](#Tasks) if you're applying for a front-end position. Focus o
 
 ## install dependencies
 
-- npm i
+  ```sh
+  npm i
+  ```
 
 ## start react app
 
-- npm start
+  ```sh
+  npm start
+  ```
 
 ## try different inputs
 
