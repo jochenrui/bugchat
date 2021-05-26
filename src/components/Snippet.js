@@ -7,11 +7,12 @@ export default function Snippet({ user, question, tags, link }) {
     <div>
       <Paper
         className="snippetBox"
-        style={
-          user === "ducky"
-            ? { float: "left", backgroundColor: "#6accc3" }
-            : { float: "right" }
-        }
+        style={{
+          float: user === "ducky" ? "left" : "right",
+          backgroundColor: user === "ducky" ? "#6accc3" : "white",
+          minHeight: "24px",
+          minWidth: "30px",
+        }}
       >
         {tags && link ? (
           <>
