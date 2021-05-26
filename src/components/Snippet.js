@@ -17,8 +17,8 @@ export default function Snippet({ user, question, tags, link }) {
         {tags && link ? (
           <>
             <Typography component="h1">Question: {question}</Typography>
-            <Typography component="p">Tags: ${tags}</Typography>
-            <Typography component="p">Link: ${link}</Typography>
+            <Typography component="p">Tags: {tags}</Typography>
+            <Typography component="p">Link: {link}</Typography>
           </>
         ) : (
           <Typography component="h1">{question}</Typography>
