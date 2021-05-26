@@ -32,6 +32,8 @@ less or equal 2 hours working time
 - implement an actual backend
 - more code cleanup
 - multiple chat windows/histories
+- error handling / data validations
+- maybe even testing
 
 ## Things that are working
 
