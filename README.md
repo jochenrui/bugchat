@@ -10,8 +10,9 @@ We **DO NOT** expect you to do all the tasks listed here. Just focus on the ones
 Focus on [task 2.1](#Tasks) if you're applying for a front-end position. Focus on [task 2.2](#Tasks) for backend positions.
 
 ## Prerequisites:
+
 1. Clone with Git (gets you extra mana) or you can download as zip (boring...)
-    > If you prefer working with hooks, check out the branch [`feature/hooked`](https://github.com/schmiedeone/bugchat/tree/feature/hooked)
+   > If you prefer working with hooks, check out the branch [`feature/hooked`](https://github.com/schmiedeone/bugchat/tree/feature/hooked)
 2. Node v10+
 
 ## Tasks
@@ -20,9 +21,9 @@ Here's a list of tasks that you can accomplish to make it cooler:
 
 1. Refactor and optimize the code where you see fit.
 2. Choose one of the following to focus on:
-    1. Have a list of other rubber ducks in a sidebar and have their chat history. (imagine whatsapp web, check attached picture for reference)
+   1. Have a list of other rubber ducks in a sidebar and have their chat history. (imagine whatsapp web, check attached picture for reference)
    2. Write a REST API (using the technology of your choice) to serve the `dialogueEngine`. Make the bot fetch the answers from the API. Try to make the `dialogueEngine` ["smarter"](#Tips-for-making-it-smarter).
-        > An express server is setup inside of the server folder. You can use it if you want to.
+      > An express server is setup inside of the server folder. You can use it if you want to.
 
 Lets go!
 
@@ -83,3 +84,13 @@ The server should be available on [http://localhost:8000](http://localhost:8000)
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and the [create-express-app](https://github.com/wesleytodd/create-express-app) repo.
+
+# Prioritisation
+
+- understand frontend, refactor code, add functionalities if missing
+- integrate StackExchange API
+- add "intelligent" word filtering
+
+## Idea
+
+- use Stackexchange API instead of making an own backend due to time limitations

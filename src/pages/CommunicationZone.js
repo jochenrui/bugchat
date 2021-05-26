@@ -24,11 +24,12 @@ class CommunicationZone extends Component {
   }
 
   handleSubmit(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || event.nativeEvent.type === "click") {
+      let valueCopy = this.state.value;
       this.setState({
         value: "",
-        disposable: event.target.value,
-        history: [...this.state.history, event.target.value],
+        disposable: valueCopy,
+        history: [...this.state.history, valueCopy],
       });
 
       setTimeout(
