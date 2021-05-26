@@ -39,16 +39,20 @@ class CommunicationZone extends Component {
       .catch((err) => console.log(err));
   };
 
-  handleChange(event) {
+  handleChange(input) {
     this.setState({
-      value: event.target.value,
+      value: input,
     });
   }
 
   handleSubmit(event) {
-    if (event.key === "Enter" || event.nativeEvent.type === "click") {
+    if (
+      // disabled send if no message is entered
+      (event.key === "Enter" || event.nativeEvent.type === "click") &&
+      this.state.value.length > 0
+    ) {
       let addedMessage = {
-        user: "us",
+        user: "user",
         question: this.state.value,
       };
       this.setState({
@@ -70,15 +74,18 @@ class CommunicationZone extends Component {
   dialogueEngine() {
     const answersBasic = [
       "can you elaborate?",
-      "and why do you believe that is so?",
+      `Maybe one of these topics interests you? ${this.state.tags
+        .slice(0, 5)
+        .join(" ")}`,
       "can you be more specific?",
-      "what would be your guess?",
       "I need more details for this one",
     ];
 
-    console.log(this.state.lastQuestion);
+    // check if the last question contains any popular tags
     const words = this.state.lastQuestion.split(" ");
-    const foundTags = words.filter((word) => this.state.tags.includes(word));
+    const foundTags = words.filter((word) =>
+      this.state.tags.includes(word.toLowerCase())
+    );
 
     if (foundTags.length > 0) {
       fetch(
