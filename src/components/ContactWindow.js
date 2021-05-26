@@ -1,11 +1,11 @@
 import React from "react";
 
-function ContactWindow() {
+export default function ContactWindow({ isTyping }) {
   return (
     <div className="headerWrapper">
-      <span className="contactName">Dr. Rubberduck</span>
+      <span className="contactName">
+        Dr. Rubberduck {isTyping ? " is typing ..." : ""}
+      </span>
     </div>
   );
 }
-
-export default ContactWindow;

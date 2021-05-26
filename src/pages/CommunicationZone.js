@@ -20,6 +20,7 @@ class CommunicationZone extends Component {
       ],
       popularTags: [],
       suggestions: {},
+      isTyping: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,10 +52,13 @@ class CommunicationZone extends Component {
       (event.key === "Enter" || event.nativeEvent.type === "click") &&
       this.state.value.length > 0
     ) {
+      this.setState({ isTyping: true });
+
       let addedMessage = {
         user: "user",
         question: this.state.value,
       };
+
       this.setState({
         value: "",
         lastQuestion: this.state.value,
@@ -65,7 +69,7 @@ class CommunicationZone extends Component {
         function () {
           this.dialogueEngine();
         }.bind(this),
-        3000
+        2000
       );
     }
     this.cleanHistory();
@@ -110,19 +114,20 @@ class CommunicationZone extends Component {
             });
           });
           this.setState({
+            isTyping: false,
             history: [...this.state.history, ...suggestions],
           });
         })
         .catch((err) => console.log(err));
     } else {
-      let response =
-        answersBasic[Math.floor(Math.random() * answersBasic.length)];
       this.setState({
+        isTyping: false,
         history: [
           ...this.state.history,
           {
             user: "ducky",
-            question: response,
+            question:
+              answersBasic[Math.floor(Math.random() * answersBasic.length)],
           },
         ],
       });
@@ -145,7 +150,7 @@ class CommunicationZone extends Component {
   render() {
     return (
       <div className="chatHost innerShadow">
-        <ContactWindow />
+        <ContactWindow isTyping={this.state.isTyping} />
         <ChatZone chatItem={this.state.history} />
         <InputZone
           handleChange={this.handleChange}
