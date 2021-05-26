@@ -32,6 +32,7 @@ Focus on [task 2.1](#Tasks) if you're applying for a front-end position. Focus o
 - Chat functionalities are working
 - fetches answers from API
 - displays that Ducky is typing
+- can't send empty message, i.e. button disabled or send not possible
 
 # Get Started
 
