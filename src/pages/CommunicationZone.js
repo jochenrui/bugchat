@@ -10,7 +10,14 @@ class CommunicationZone extends Component {
     this.state = {
       value: "",
       lastQuestion: "",
-      history: ["How can I help?"],
+      history: [
+        {
+          user: "ducky",
+          question: "How can I help?",
+          tags: null,
+          link: null,
+        },
+      ],
       tags: [],
       suggestions: {},
     };
@@ -40,11 +47,14 @@ class CommunicationZone extends Component {
 
   handleSubmit(event) {
     if (event.key === "Enter" || event.nativeEvent.type === "click") {
-      let valueCopy = this.state.value;
+      let addedMessage = {
+        user: "us",
+        question: this.state.value,
+      };
       this.setState({
         value: "",
-        lastQuestion: valueCopy,
-        history: [...this.state.history, valueCopy],
+        lastQuestion: this.state.value,
+        history: [...this.state.history, addedMessage],
       });
 
       setTimeout(
@@ -78,13 +88,19 @@ class CommunicationZone extends Component {
       )
         .then((res) => res.json())
         .then((data) => {
-          const suggestions = [];
+          const suggestions = [
+            {
+              user: "ducky",
+              question: "Maybe one of these questions could help you:",
+            },
+          ];
           data.items.map((question) => {
-            suggestions.push(
-              `Question: ${question.title}\nTags: ${question.tags.join(
-                " "
-              )}\nLink: ${question.link}`
-            );
+            suggestions.push({
+              user: "ducky",
+              question: question.title,
+              tags: question.tags.join(" "),
+              link: question.link,
+            });
           });
           this.setState({
             history: [...this.state.history, ...suggestions],
@@ -95,7 +111,13 @@ class CommunicationZone extends Component {
       let response =
         answersBasic[Math.floor(Math.random() * answersBasic.length)];
       this.setState({
-        history: [...this.state.history, response],
+        history: [
+          ...this.state.history,
+          {
+            user: "ducky",
+            question: response,
+          },
+        ],
       });
     }
   }
