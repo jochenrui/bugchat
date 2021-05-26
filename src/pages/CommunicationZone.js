@@ -18,7 +18,7 @@ class CommunicationZone extends Component {
           link: null,
         },
       ],
-      tags: [],
+      popularTags: [],
       suggestions: {},
     };
 
@@ -27,14 +27,14 @@ class CommunicationZone extends Component {
   }
 
   componentDidMount = () => {
+    // fetch popular
     fetch(
       "https://api.stackexchange.com/2.2/tags?pagesize=100&order=desc&sort=popular&site=stackoverflow"
     )
       .then((res) => res.json())
       .then((data) => {
-        let tags = data.items.map((item) => item.name);
-        this.setState({ tags: tags });
-        console.log(tags);
+        let popularTags = data.items.map((item) => item.name);
+        this.setState({ popularTags: popularTags });
       })
       .catch((err) => console.log(err));
   };
@@ -74,7 +74,7 @@ class CommunicationZone extends Component {
   dialogueEngine() {
     const answersBasic = [
       "can you elaborate?",
-      `Maybe one of these topics interests you? ${this.state.tags
+      `Maybe one of these topics interests you? ${this.state.popularTags
         .slice(0, 5)
         .join(" ")}`,
       "can you be more specific?",
@@ -84,7 +84,7 @@ class CommunicationZone extends Component {
     // check if the last question contains any popular tags
     const words = this.state.lastQuestion.split(" ");
     const foundTags = words.filter((word) =>
-      this.state.tags.includes(word.toLowerCase())
+      this.state.popularTags.includes(word.toLowerCase())
     );
 
     if (foundTags.length > 0) {
