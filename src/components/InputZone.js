@@ -16,6 +16,7 @@ export default function InputZone(props) {
         onChange={props.handleChange}
       />
       <IconButton
+        disabled={props.value.length === 0 ? true : false}
         className="iconButton"
         aria-label="Search"
         onClick={props.handleSubmit}
