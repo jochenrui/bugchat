@@ -9,13 +9,28 @@ class CommunicationZone extends Component {
     super(props);
     this.state = {
       value: "",
-      disposable: "",
+      lastQuestion: "",
       history: ["How can I help?"],
+      tags: [],
+      suggestions: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount = () => {
+    fetch(
+      "https://api.stackexchange.com/2.2/tags?pagesize=100&order=desc&sort=popular&site=stackoverflow"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        let tags = data.items.map((item) => item.name);
+        this.setState({ tags: tags });
+        console.log(tags);
+      })
+      .catch((err) => console.log(err));
+  };
 
   handleChange(event) {
     this.setState({
@@ -28,7 +43,7 @@ class CommunicationZone extends Component {
       let valueCopy = this.state.value;
       this.setState({
         value: "",
-        disposable: valueCopy,
+        lastQuestion: valueCopy,
         history: [...this.state.history, valueCopy],
       });
 
@@ -50,37 +65,35 @@ class CommunicationZone extends Component {
       "what would be your guess?",
       "I need more details for this one",
     ];
-    const answersAdvanced = [
-      "have you check the logs?",
-      "have you tried restarting?",
-      "what does the documentation say?",
-      "Maybe its a typo",
-    ];
-    const answersAdjust = [
-      "you need to be a bit more specific",
-      "come on I am trying to help",
-      "whatever",
-      "that does not sound like a bug",
-    ];
 
-    if (this.state.disposable.length <= 7) {
-      let response =
-        answersAdjust[Math.floor(Math.random() * answersAdjust.length)];
-      this.setState({
-        history: [...this.state.history, response],
-      });
-    } else if (
-      this.state.history.length <= 3 &&
-      this.state.disposable.length > 6
-    ) {
+    console.log(this.state.lastQuestion);
+    const words = this.state.lastQuestion.split(" ");
+    const foundTags = words.filter((word) => this.state.tags.includes(word));
+
+    if (foundTags.length > 0) {
+      fetch(
+        `https://api.stackexchange.com/2.2/search/advanced?%20order=desc&site=stackoverflow&accepted=true&sort=votes&pageSize=5&q=${foundTags.join(
+          " AND "
+        )}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const suggestions = [];
+          data.items.map((question) => {
+            suggestions.push(
+              `Question: ${question.title}\nTags: ${question.tags.join(
+                " "
+              )}\nLink: ${question.link}`
+            );
+          });
+          this.setState({
+            history: [...this.state.history, ...suggestions],
+          });
+        })
+        .catch((err) => console.log(err));
+    } else {
       let response =
         answersBasic[Math.floor(Math.random() * answersBasic.length)];
-      this.setState({
-        history: [...this.state.history, response],
-      });
-    } else if (this.state.history.length >= 4) {
-      let response =
-        answersAdvanced[Math.floor(Math.random() * answersAdvanced.length)];
       this.setState({
         history: [...this.state.history, response],
       });
